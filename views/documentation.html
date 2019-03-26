@@ -1,0 +1,201 @@
+
+<!-- saved from url=(0025)http://localhost:4567/doc -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>DocDSL Documentation</title>
+    <style type="text/css">
+      #container{width:960px; margin:1em auto; font-family:monaco, monospace;font-size:11px;}
+      dt{ background:#f5f5f5; font-weight:bold; float:left; margin-right:1em; }
+      dd{ margin-left:1em; }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      
+<p>API</p>
+
+<h1 id="docdsl-documentation">DocDSL Documentation</h1>
+
+<p>API Documentation for this resource</p>
+
+<h2 id="get-apitodos">GET /api/todos</h2>
+
+<p>Retreive all todos.</p>
+
+<h3 id="response">Response</h3>
+<p>JSON: all todos.</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"> <a href="http://localhost:4567/doc#n1" name="n1">1</a></span>[
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n2" name="n2">2</a></span>  {
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n3" name="n3">3</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>id</span><span style="color:#404">"</span></span>: <span style="color:#00D">1</span>,
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n4" name="n4">4</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>title</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">todo1</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n5" name="n5">5</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>day</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">11</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n6" name="n6">6</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>month</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">11</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n7" name="n7">7</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>year</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">2017</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n8" name="n8">8</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>completed</span><span style="color:#404">"</span></span>: <span style="color:#069">true</span>,
+<span class="line-numbers"> <a href="http://localhost:4567/doc#n9" name="n9">9</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>description</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Some Description</span><span style="color:#710">"</span></span>
+<span class="line-numbers"><strong><a href="http://localhost:4567/doc#n10" name="n10">10</a></strong></span>  },
+<span class="line-numbers"><a href="http://localhost:4567/doc#n11" name="n11">11</a></span>  {
+<span class="line-numbers"><a href="http://localhost:4567/doc#n12" name="n12">12</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>id</span><span style="color:#404">"</span></span>: <span style="color:#00D">2</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n13" name="n13">13</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>title</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">todo2</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n14" name="n14">14</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>day</span><span style="color:#404">"</span></span>: <span style="color:#069">null</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n15" name="n15">15</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>month</span><span style="color:#404">"</span></span>: <span style="color:#069">null</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n16" name="n16">16</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>year</span><span style="color:#404">"</span></span>: <span style="color:#069">null</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n17" name="n17">17</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>completed</span><span style="color:#404">"</span></span>: <span style="color:#069">false</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n18" name="n18">18</a></span>    <span style="color:#606"><span style="color:#404">"</span><span>description</span><span style="color:#404">"</span></span>: <span style="color:#069">null</span>
+<span class="line-numbers"><a href="http://localhost:4567/doc#n19" name="n19">19</a></span>  }
+<span class="line-numbers"><strong><a href="http://localhost:4567/doc#n20" name="n20">20</a></strong></span>]
+</pre></div>
+</div>
+</div>
+
+<h2 id="get-apitodosid">GET /api/todos/{id}</h2>
+
+<p>Retrieves todo with id = {id}</p>
+
+<h3 id="url-parameters">Url Parameters</h3>
+
+<dl>
+  <dt>id</dt>
+  <dd>The id of the requested todo.</dd>
+</dl>
+
+<h3 id="response-1">Response</h3>
+<p>JSON: the todo</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="http://localhost:4567/doc#n1" name="n1">1</a></span>{
+<span class="line-numbers"><a href="http://localhost:4567/doc#n2" name="n2">2</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>id</span><span style="color:#404">"</span></span>: <span style="color:#00D">1</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n3" name="n3">3</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>title</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">todo 1</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n4" name="n4">4</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>day</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">11</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n5" name="n5">5</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>month</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">11</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n6" name="n6">6</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>year</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">2017</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n7" name="n7">7</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>completed</span><span style="color:#404">"</span></span>: <span style="color:#069">true</span>
+<span class="line-numbers"><a href="http://localhost:4567/doc#n8" name="n8">8</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="status-codes">Status codes</h3>
+
+<dl>
+  <dt>200</dt>
+  <dd>OK - When todo with id = {id} is found.</dd>
+  <dt>404</dt>
+  <dd>Not Found - When todo is not found. Body: “There is no todo with id = {id}”</dd>
+</dl>
+
+<h2 id="post-apitodos">POST /api/todos</h2>
+
+<p>Saves a new todo.</p>
+
+<h3 id="request-body">Request body</h3>
+
+<p>Request payload can be either json or a query string</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="http://localhost:4567/doc#n1" name="n1">1</a></span>{
+<span class="line-numbers"><a href="http://localhost:4567/doc#n2" name="n2">2</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>title</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String (Required) : The todo title. At least three characters long.</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n3" name="n3">3</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>month</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Format mm. Not saved if format is incorrect</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n4" name="n4">4</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>day</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Format dd. Not saved if format is incorrect</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n5" name="n5">5</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>year</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Format yyyy. Not saved if format is incorrect</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n6" name="n6">6</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>description</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Description of the todo)</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n7" name="n7">7</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>completed</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Boolean : Completion status of todo. Will default to false for new todo</span><span style="color:#710">"</span></span>
+<span class="line-numbers"><a href="http://localhost:4567/doc#n8" name="n8">8</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="response-2">Response</h3>
+<p>JSON: The newly created todo with an id attribute</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="http://localhost:4567/doc#n1" name="n1">1</a></span>{
+<span class="line-numbers"><a href="http://localhost:4567/doc#n2" name="n2">2</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>id</span><span style="color:#404">"</span></span>: <span style="color:#00D">1</span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n3" name="n3">3</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>title</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">todo 1</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n4" name="n4">4</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>day</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">11</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n5" name="n5">5</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>month</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">11</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n6" name="n6">6</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>year</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">2017</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n7" name="n7">7</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>completed</span><span style="color:#404">"</span></span>: <span style="color:#069">true</span>
+<span class="line-numbers"><a href="http://localhost:4567/doc#n8" name="n8">8</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="status-codes-1">Status codes</h3>
+
+<dl>
+  <dt>201</dt>
+  <dd>Created - When the todo is saved</dd>
+  <dt>400</dt>
+  <dd>Bad Request - When todo cannot be saved (due to incorrect attributes). Body: “Todo cannot be saved”</dd>
+</dl>
+
+<h2 id="put-apitodosid">PUT /api/todos/{id}</h2>
+
+<p>Updates a todo. Uses key/value pairs sent via POST to set attributes of the todo. If key/value pair is not present, its previous value is preserved</p>
+
+<h3 id="request-body-1">Request body</h3>
+
+<p>Request payload can be either json or a query string</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span class="line-numbers"><a href="http://localhost:4567/doc#n1" name="n1">1</a></span>{
+<span class="line-numbers"><a href="http://localhost:4567/doc#n2" name="n2">2</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>title</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : The todo title. At least 3 characters long</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n3" name="n3">3</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>month</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Format mm. Not saved if format is incorrect</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n4" name="n4">4</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>day</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Format dd. Not saved if format is incorrect</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n5" name="n5">5</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>year</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Format yyyy. Not saved if format is incorrect</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n6" name="n6">6</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>description</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">String : Description of the todo)</span><span style="color:#710">"</span></span>,
+<span class="line-numbers"><a href="http://localhost:4567/doc#n7" name="n7">7</a></span>  <span style="color:#606"><span style="color:#404">"</span><span>completed</span><span style="color:#404">"</span></span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">"</span><span style="color:#D20">Boolean : Completion status of todo. Will default to false for new todo</span><span style="color:#710">"</span></span>
+<span class="line-numbers"><a href="http://localhost:4567/doc#n8" name="n8">8</a></span>}
+</pre></div>
+</div>
+</div>
+
+<h3 id="response-3">Response</h3>
+<p>JSON: The updated todo</p>
+
+<h3 id="status-codes-2">Status codes</h3>
+
+<dl>
+  <dt>201</dt>
+  <dd>Created - When todo is saved</dd>
+  <dt>400</dt>
+  <dd>Bad Request - When todo cannot be saved or todo with given id does not exist. Body: “Todo cannot be updated.”</dd>
+</dl>
+
+<h2 id="delete-apitodosid">DELETE /api/todos/{id}</h2>
+
+<p>Deletes a todo</p>
+
+<h3 id="status-codes-3">Status codes</h3>
+
+<dl>
+  <dt>204</dt>
+  <dd>No Content - 204 with no body when todo is deleted</dd>
+  <dt>400</dt>
+  <dd>Bad Request - When todo with id = {id} does not exist. Body: “Todo does not exist”</dd>
+</dl>
+
+<h2 id="post-apitodosidtogglecompleted">POST /api/todos/{id}/toggle_completed</h2>
+
+<p>Toggles a todo completed. If todo with id = {id} has completed = true, it is set to false and vice versa</p>
+
+<h3 id="response-4">Response</h3>
+<p>JSON: the updated todo</p>
+
+<h3 id="status-codes-4">Status codes</h3>
+
+<dl>
+  <dt>201</dt>
+  <dd>Created - When todo is deleted</dd>
+  <dt>400</dt>
+  <dd>Bad Request - When todo with id = {id} cannot be found</dd>
+</dl>
+
+<p>Powered by <strong><a href="https://github.com/jillesvangurp/sinatra-docdsl">Sinatra DocDSL</a></strong></p>
+
+    </div>
+  
+
+</body></html>
