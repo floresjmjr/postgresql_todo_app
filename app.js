@@ -15,7 +15,7 @@ var Pool = require('pg').Pool;
 var config = {
   user: 'jorge',
   host: 'localhost',
-  database: 'films',
+  database: 'todos',
   password: '',
   port: 5432,
 }
@@ -30,22 +30,14 @@ pool.on('error', (err, client) => {
 // callback - checkout a client
 pool.connect((err, client) => {
   if (err) throw err;
-  client.query('SELECT * FROM directors', (err, res) => {
+  client.query('SELECT * FROM todos', (err, res) => {
     if (err) {
       console.log(err.stack)
     } else {
       console.log(res.rows)
     }
   })
-})
-
-// async function get_hits() {
-//   var response = await pool.query();
-//   console.log(response.rows);
-// }
-
-// get_hits();
-
+});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
