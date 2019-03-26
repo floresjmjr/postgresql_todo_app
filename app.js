@@ -10,35 +10,6 @@ var todoRouter = require('./routes/todos');
 
 var app = express();
 
-// database
-var Pool = require('pg').Pool;
-var config = {
-  user: 'jorge',
-  host: 'localhost',
-  database: 'todos',
-  password: '',
-  port: 5432,
-}
-
-var pool = new Pool(config);
-
-pool.on('error', (err, client) => {
-  console.error('Unexpected error on idle client', err)
-  process.exit(-1)
-})
-
-// callback - checkout a client
-pool.connect((err, client) => {
-  if (err) throw err;
-  client.query('SELECT * FROM todos', (err, res) => {
-    if (err) {
-      console.log(err.stack)
-    } else {
-      console.log(res.rows)
-    }
-  })
-});
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

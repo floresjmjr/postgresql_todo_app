@@ -46,33 +46,3 @@ module.exports = {
   },
 
 }
-
-
-// database
-var Pool = require('pg').Pool;
-var config = {
-  user: 'jorge',
-  host: 'localhost',
-  database: 'films',
-  password: '',
-  port: 5432,
-}
-
-var pool = new Pool(config);
-
-pool.on('error', (err, client) => {
-  console.error('Unexpected error on idle client', err)
-  process.exit(-1)
-})
-
-// callback - checkout a client
-pool.connect((err, client) => {
-  if (err) throw err;
-  client.query('SELECT * FROM directors', (err, res) => {
-    if (err) {
-      console.log(err.stack)
-    } else {
-      console.log(res.rows)
-    }
-  })
-});
