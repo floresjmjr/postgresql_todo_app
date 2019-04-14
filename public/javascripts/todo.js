@@ -94,7 +94,7 @@ $(function() {
     retrieveAllTodos: function() {
       this.promiseAll().then((response) => {
         console.log('requestAllTodos response', response);
-        LStodoApp.loadPage(response);
+        LStodoApp.loadPage(JSON.parse(response));
       }, (error) => {
         console.error('Failed', error);
       })
@@ -104,7 +104,6 @@ $(function() {
       return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest();
         request.open('GET', 'http://localhost:3000/api/todos');
-        request.responseType = 'json';
         request.send();
         request.addEventListener('load', () => {
           if (request.status === 200) {
@@ -145,8 +144,9 @@ $(function() {
 
     addTodo: function() {
       this.promiseAdd().then((response) => {
-        console.log('Drive addTodo id', response.id);
-        LStodoApp.processAdd(response.id);        
+        var parsedResponse = JSON.parse(response)
+        console.log('Drive addTodo id', parsedResponse.id);
+        LStodoApp.processAdd(parsedResponse);        
       }, (error) => {
         console.error("wasn't added", error);
       })
@@ -158,7 +158,6 @@ $(function() {
         request.open('POST', 'http://localhost:3000/api/todos')
         const jsonTodo = JSON.stringify(LStodoApp.todoP());
         request.setRequestHeader('Content-type', 'application/json');
-        request.responseType = 'json';
         request.send(jsonTodo)
         console.log('promiseAdd', jsonTodo);
 
@@ -611,8 +610,8 @@ $(function() {
         Display.nav();
       },
 
-      processAdd: function(responseId) {
-        todoP.id = responseId
+      processAdd: function(response) {
+        todoP.id = response.id;
         console.log('processAdd', todoP);
         localAllTodos.push(this.addFormatedDate(todoP));
         mainTodos = localAllTodos;
@@ -708,8 +707,8 @@ $(function() {
   //OLOO Design Pattern
   const LStodoApp = Object.create(TodoApp);
   LStodoApp.init();
-  console.dir(LStodoApp);
-  console.log(TodoApp.isPrototypeOf(LStodoApp));
+  // console.dir(LStodoApp);
+  // console.log(TodoApp.isPrototypeOf(LStodoApp));
 })
 
 

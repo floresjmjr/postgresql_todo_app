@@ -3,12 +3,18 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var db = require('./config/database')
 
 var indexRouter = require('./routes/index');
 var docRouter = require('./routes/documentation');
 var todoRouter = require('./routes/todos');
 
 var app = express();
+
+// testing database connection
+db.authenticate().then(()=>{
+  console.log('Database connection is good to go!')
+}).catch((err)=>{console.log(err)})
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
