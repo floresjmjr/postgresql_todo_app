@@ -9,7 +9,7 @@ nav {
   display: block;
   width: 250px;
   background: #464f77;
-  height: 900px;
+  height: 100%;
 }
 
 nav ul {
@@ -43,7 +43,7 @@ nav p {
 
 nav img {
   position: absolute;
-  left: 15%;
+  left: 12%;
   top: 15%;
 }
 
@@ -78,9 +78,10 @@ nav span {
 main {
   display: block;
   margin-left: 250px;
-  height: 100vh;
+  height: 100%;
   background: #fff;
   margin-right: 60px;
+  max-width: 1300px;
 }
 
 /* Main Header */
@@ -142,6 +143,7 @@ article p {
 article img {
   margin: 0 10px;
 }
+
 article dd {
   text-align: right;
   width: 10%;
@@ -178,6 +180,11 @@ article li {
   height: 400px;
   border: 1px solid #000;
   padding: 35px;
+  margin: auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
 
 #modal ul {
@@ -236,10 +243,19 @@ article li {
   border-radius: 5px;
 }
 
+#hamburger, label[for="hamburger"], label[for="hamburger"] img {
+	display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
 
+label[for="hamburger"] img {
+	width: 25px;
+}
 
 /* Media related view */
-/* 
+
 @media (max-width: 768px) {
 
 	nav {
@@ -251,9 +267,7 @@ article li {
 		margin-left: 0;
 	}
 
-	label[for="hamburger"], label[for="hamburger"] img {
-		left: 13px;
-		top: 7px;
+  label[for="hamburger"], label[for="hamburger"] img {
 		display: block;
 	}
 
@@ -270,45 +284,3 @@ article li {
 	}
 
 }
-
-
-@media (max-width: 640px) {
-
-	body {
-		font-size: 12px;
-	}
-
-	nav img {
-		width: 15px;
-	}
-
-	main img {
-		width: 18px;
-	}
-
-	.checkbox > label:before {
-		background-size: 15px;
-		vertical-align: middle;
-		margin-right: 5px;
-	}
-
-}
-
-
-@media (max-width: 400px) {
-
-	nav {
-		width: 130px;
-	}
-
-	#hamburger:checked ~ main  {
-		margin-left: 130px;
-		padding-left: 15px;
-	}	
-
-	#hamburger:checked ~ label[for="hamburger"] {
-		left: 142px;
-	}
-
-} */
-

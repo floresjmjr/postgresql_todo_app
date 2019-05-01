@@ -247,9 +247,11 @@ $(function() {
           console.log('stopPropagation')
         })
         $(document).on('click', (e) => {
-          e.preventDefault();
-          $('#modal').hide();
-          console.log('hide Modal');
+          if($('#modal').css('display') === 'block'){
+            e.preventDefault();
+            $('#modal').hide();
+            console.log('hide Modal');
+          }
         })
       },
 
@@ -541,7 +543,7 @@ $(function() {
         allTodos.splice(this.findIndex(), 1, todoP);
       },
 
-      findIndex: function(array) {
+      findIndex: function() {
         let index;
         allTodos.forEach((todo, idx) => {
           if(todo.id === todoP.id){
