@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Contact Manager using Backbone</title>
+  <title>Multi-View Todo List</title>
   <link rel='stylesheet' href='stylesheets/reset.css'>
   <link rel="stylesheet" href="stylesheets/styles.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -100,11 +100,19 @@
 
 
   <nav>
-    <h2 id='nav_header_all_todos' class='highlight'><img src='images/label.png'>All Todos<span>0</span></h2>
-    <ul id='nav_todo_list'>
+    <h2 id='nav_header_all_groups' data='all' class='highlight'>
+      <img src='images/label.png'>
+      <p>All Todos</p>
+      <span>0</span>
+    </h2>
+    <ul id='nav_list_all_groups' data='all'>
     </ul>
-    <h2 id='nav_header_completed_todos'><img src='images/completed.png'>Completed<span>0</span></h2>
-    <ul id='nav_completed_todo_list'>
+    <h2 id='nav_header_completed_groups' data='completed'>
+      <img src='images/completed.png'>
+      <p>Completed</p>
+      <span>0</span>
+    </h2>
+    <ul id='nav_list_completed_groups' data='completed'>
     </ul>
   </nav
   ><main>
@@ -116,9 +124,7 @@
       </header>
       <article>
         <dl>
-          <ul id='main_all_todos'>
-          </ul>
-          <ul id='main_all_completed_todos'>
+          <ul id='main_todos'>
           </ul>
         </dl>
       </article>
@@ -126,6 +132,7 @@
   </main>
 
   <script id='todo_item_template' type='text/x-handlebars'>
+    {{#each todos}}
     <li data={{id}}>
       <dt>
         {{#if completed}}
@@ -140,26 +147,24 @@
         <img data='delete' src='images/trash.png'>
       </dd>
     </li>
-  </script>
-
-  <script id='todo_item_iterator' type='text/x-handlebars'>
-    {{#each todos}}
-      {{> applyTemplate}}
     {{/each}}
   </script>
 
-  <script id='nav_todo_template' type='text/x-handlebars'>
+  <script id='nav_group_template' type='text/x-handlebars'>
+    {{#each todos}}
     {{#if completed}}
-    <li data={{id}}>{{date}}<span>{{count}}</span></li>
+    <li>
+      <p>{{date}}</p>
+      <span>{{count}}</span>
+    </li>
     {{else}}
-    <li data={{id}}>{{date}}<span>{{count}}</span></li>
+    <li>
+      <p>{{date}}</p>
+      <span>{{count}}</span>
+    </li>
     {{/if}}
-  </script>
-
-  <script id='nav_todo_iterator' type='text/x-handlebars'>
-    {{#each todos}}
-    {{> applyTemplate}}
     {{/each}}
+
   </script>
 
 </body>
