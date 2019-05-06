@@ -19,7 +19,8 @@ const Todo = db.define('todo', {
   },
   completed: {
     type: Sequelize.BOOLEAN
-  }
+  },
+  timestamps: false,
 })
 
 module.exports = Todo;
