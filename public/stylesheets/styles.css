@@ -12,11 +12,7 @@ nav {
   height: 100%;
 }
 
-nav ul {
-  text-align: center;
-}
-
-nav h2 {
+nav header {
   position: relative;
   text-align: center;
   margin-top: 40px;
@@ -27,31 +23,36 @@ nav h2 {
 }
 
 nav li {
+  position: relative;
   text-align: center;
   padding: 10px;
   cursor: pointer; 
   color: #b3b3b3;
 }
 
-#nav_completed_todo_list li {
+#nav_list_completed_groups p {
   text-decoration: line-through;
 }
 
-nav p {
+nav h2 {
   display: inline-block;
 }
 
 nav img {
   position: absolute;
-  left: 12%;
+  left: 8%;
   top: 15%;
 }
 
 nav span {
   position: absolute;
-  right: 0%;
+  margin: auto;
+  right: 0;
+  bottom: 0;
+  top: 0;
   margin-right: 20px;
   width: 19px;
+  height: 20px;
   background-color: #6b7292;
   border-radius: 50%;
   color: #b3b3b3;
@@ -67,17 +68,11 @@ nav span {
   color: #fff;
 }
 
-/* Main Container */
-
-#listing_detailed_todos {
-  margin-left: 30px;
-}
-
 /* Main */
 
 main {
   display: block;
-  margin-left: 250px;
+  margin-left: 280px;
   height: 100%;
   background: #fff;
   margin-right: 60px;
@@ -121,51 +116,51 @@ header img {
   margin: 0 10px;
 }
 
-/* Main Article */
+/* Main Definition List */
 
-article .completed {
+dl .completed {
   text-decoration: line-through;
   color: #b3b3b3;
 }
 
-article {
+dl {
   margin-top: 15px;  
 }
 
-article dt, article dd, article img, article p {
+dl dt, dl dd, dl img, dl p {
   display: inline-block;
 }
 
-article p {
+dl p {
   cursor: pointer;
 }
 
-article img {
+dl img {
   margin: 0 10px;
 }
 
-article dd {
+dl dd {
   text-align: right;
   width: 10%;
   padding: 15px 0;
   cursor: pointer;
 }
 
-article dd:hover {
+dl dd:hover {
   background-color: #ffb3b3;
 }
 
-article dt {
+dl dt {
   text-align: left;
   width: 90%;
   padding: 17px 0;  
 }
 
-article dt:hover {
+dl dt:hover {
   background: #cce6ff;
 }
 
-article li {
+dl div {
   border-top: 1px solid lightgray;
 }
 
@@ -226,11 +221,11 @@ article li {
   padding: 10px;
   font-size: 16px;
 }
-#select_container {
+#due_date {
   display: inline-block;
   width: 400px;
 }
-#select_container select {
+#due_date select {
   width: 30%;
 }
 
@@ -264,7 +259,7 @@ label[for="hamburger"] img {
 	}
 
 	main {
-		margin-left: 0;
+		margin-left: 30px;
 	}
 
   label[for="hamburger"], label[for="hamburger"] img {
@@ -276,7 +271,7 @@ label[for="hamburger"] img {
 	}
 
 	#hamburger:checked ~ main  {
-		margin-left: 200px;
+		margin-left: 230px;
 	}	
 
 	#hamburger:checked ~ label[for="hamburger"] {

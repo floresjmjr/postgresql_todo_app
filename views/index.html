@@ -16,11 +16,11 @@
     <ul>
       <li>
         <label for='title'>Title</label>
-        <input type='text' name='title' placeholder='Item 1'>
+        <input type='text' id='title' placeholder='Item 1'>
       </li>
       <li>
-        <label for='due_date'>Due Date</label>
-        <div id='select_container'>
+        <label>Due Date</label>
+        <div id='due_date'>
           <select name='month'>
             <option>Month</option>
             <option value="01">January</option>
@@ -89,7 +89,7 @@
       </li>
       <li>
         <label for='description'>Description</label>
-        <textarea placeholder='Description'></textarea>
+        <textarea placeholder='Description' id='description'></textarea>
       </li>
       <li>
         <label></label>
@@ -103,53 +103,47 @@
   <label for="hamburger"><img src="/images/hamburger.png" alt="navigation button"></label>
 
   <nav>
-    <h2 id='nav_header_all_groups' data='all' class='highlight'>
-      <img src='images/label.png'>
-      <p>All Todos</p>
+    <header id='nav_header_all_groups' class='highlight'>
+      <img src='images/label.png' alt='all todos nav icon'>
+      <h2>All Todos</h2>
       <span>0</span>
-    </h2>
-    <ul id='nav_list_all_groups' data='all'>
+    </header>
+    <ul id='nav_list_all_groups'>
     </ul>
-    <h2 id='nav_header_completed_groups' data='completed'>
-      <img src='images/completed.png'>
-      <p>Completed</p>
+    <header id='nav_header_completed_groups'>
+      <img src='images/completed.png' alt='completed todos nav icon'>
+      <h2>Completed</h2>
       <span>0</span>
-    </h2>
-    <ul id='nav_list_completed_groups' data='completed'>
+    </header>
+    <ul id='nav_list_completed_groups'>
     </ul>
   </nav
   ><main>
-    <div id=listing_detailed_todos>
-      <header>
-        <h1>All Todos</h1>
-        <span>0</span>
-        <button name='addTodo'><img src='images/plus.png'>Add new to do</button>
-      </header>
-      <article>
-        <dl>
-          <ul id='main_todos'>
-          </ul>
-        </dl>
-      </article>
-    </div>
+    <header>
+      <h1>All Todos</h1>
+      <span>0</span>
+      <button name='addTodo'><img src='images/plus.png' alt='plus sign, button to add a todo'>Add new to do</button>
+    </header>
+    <dl id='main_todos'>
+    </dl>
   </main>
 
   <script id='todo_item_template' type='text/x-handlebars'>
     {{#each todos}}
-    <li data={{id}}>
+    <div data={{id}}>
       <dt>
         {{#if completed}}
-          <img data='checkbox' src='images/checked.png'>
+          <img data='checkbox' src='images/checked.png' alt='checked box image'>
           <p class='completed'>{{title}} - {{date}}</p>
         {{else}}
-          <img data='checkbox' src='images/checkbox.png'>
+          <img data='checkbox' src='images/checkbox.png' alt='unchecked box image'>
           <p>{{title}} - {{date}}</p>
         {{/if}}
       </dt><!--
    --><dd>
-        <img data='delete' src='images/trash.png'>
+        <img data='delete' src='images/trash.png' alt='clickable delete image to delete a todo'>
       </dd>
-    </li>
+    </div>
     {{/each}}
   </script>
 

@@ -9,7 +9,9 @@ $(function() {
     },
 
     count: function() {
-      console.log('displayCount');
+      console.log('displayCount all', LStodoApp.allTodos().length );
+      console.log('displayCount completed', LStodoApp.filterCompletedTodos().length );
+      console.log('displayCount completed span', $('#nav_header_completed_groups span').text());
       $('#nav_header_all_groups span').text(LStodoApp.allTodos().length);
       $('#nav_header_completed_groups span').text(LStodoApp.filterCompletedTodos().length);
     },
@@ -38,37 +40,43 @@ $(function() {
 
 
     //Need to refactor
-    highlight: function(element) {
+    highlight: function(header) {
       console.log('highlight')
+      var element;
       $('nav').find('.highlight').removeClass('highlight');
-      if(element) {
-        this.updateHeaderCount($(element).find('span').text())
-        this.updateHeaderTitle($(element).find('p').text());
+      if(header === 'All Todos') {
+        element = $('#nav_header_all_groups')
+        this.updateHeaderCount($('#nav_header_all_groups span').text())
+        this.updateHeaderTitle($('#nav_header_all_groups h2').text());
       } else if(LStodoApp.selected().view) {
-        if(LStodoApp.selected().type === 'all'){
+        console.log('view highlight')
+        if(LStodoApp.selected().type === 'nav_list_all_groups'){
           element = $('#nav_list_all_groups p').filter((idx, el)=>{
             return $(el).text() === LStodoApp.selected().date
-          }).closest('li');
+          }).closest('div');
         } else {
           element = $('#nav_list_completed_groups p').filter((idx, el)=>{
             return $(el).text() === LStodoApp.selected().date
-          }).closest('li');
+          }).closest('div');
         }
         this.updateHeaderCount(element.length)
         this.updateHeaderTitle(LStodoApp.selected().date)
       } else {
         if(LStodoApp.selected().type === 'All Todos'){
+          console.log('all highlight')
           element = $('#nav_header_all_groups');
           console.log('length');
           this.updateHeaderCount(LStodoApp.allTodos().length)
-          this.updateHeaderTitle($(element).find('p').text())
+          this.updateHeaderTitle($(element).find('h2').text())
         } else {
+          console.log('completed highlight')
           element = $('#nav_header_completed_groups');
           this.updateHeaderCount(LStodoApp.filterCompletedTodos().length)
-          this.updateHeaderTitle($(element).find('p').text())
+          console.log('testing', $(element).find('h2').text())
+          this.updateHeaderTitle($(element).find('h2').text())
         }
       }
-      console.log('element', element.length)
+      console.log('element length', $(element).length)
       $(element).addClass('highlight')
     },
 
@@ -258,11 +266,12 @@ $(function() {
       //Todo Group Methods
 
       loadHeaderTodoGroups: function() {
-        $('nav').on('click', 'h2', (e) => {
-          console.log('nav_header_all_groups');
+        $('nav').on('click', 'header', (e) => {
+          console.log('load header groups',$(e.currentTarget) );
           e.preventDefault();
+          console.log('count of header group', $(e.currentTarget).find('span').text());
           Display.highlight(e.currentTarget);
-          var groupType = $(e.currentTarget).find('p').text();
+          var groupType = $(e.currentTarget).find('h2').text();
           selected = {type: groupType}
           Display.main();
         });
@@ -274,7 +283,7 @@ $(function() {
           e.preventDefault();
           Display.highlight(e.currentTarget);
           const date = $(e.currentTarget).find('p').text();
-          const groupType = $(e.currentTarget).closest('ul').attr('data')
+          const groupType = $(e.currentTarget).closest('ul').attr('id')
           selected = {view: 'group', date: date, type: groupType}
           Display.main('group');
         })
@@ -291,8 +300,8 @@ $(function() {
         return this.isNotUnique(groupArr, t);
       },
 
-      createOrSortGroups: function(scope='all'){
-        if(scope === 'all') {
+      createOrSortGroups: function(scope='nav_list_all_groups'){
+        if(scope === 'nav_list_all_groups') {
           todoGroups = [];
           var groupArr = todoGroups
           var todos = allTodos;
@@ -329,7 +338,7 @@ $(function() {
 
       findGroupByDate(date, type){
         console.log('findGroupById', date, type);
-        if(type === 'all'){
+        if(type === 'id="nav_list_all_groups'){
           var arr = todoGroups;
         } else {
           var arr = completedGroups;
@@ -361,7 +370,7 @@ $(function() {
       },
 
       obtainID: function(element) {
-        const id = $(element).closest('li').attr('data');
+        const id = $(element).closest('div').attr('data');
         return id
       },
 
@@ -417,7 +426,7 @@ $(function() {
       },
 
       btnEditTodo: function() {
-        $('article').on('click', 'p', (e) => {
+        $('dl').on('click', 'p', (e) => {
           e.preventDefault();
           e.stopPropagation();
           const id = this.obtainID($(e.target));
@@ -430,7 +439,7 @@ $(function() {
       },
 
       btnCheckbox: function() {
-        $('article').on('click', 'dt', (e) => {
+        $('dl').on('click', 'dt', (e) => {
           e.preventDefault();
           e.stopPropagation();
           const id = this.obtainID($(e.target));
@@ -441,7 +450,7 @@ $(function() {
       },
 
       btnDelete: function() {
-        $('article').on('click', 'dd', (e) => {
+        $('dl').on('click', 'dd', (e) => {
           e.preventDefault();
           const id = this.obtainID($(e.target));
           this.findTodoById(id); 
@@ -487,7 +496,7 @@ $(function() {
         Display.nav();
         Display.count();
         selected = {type: 'All Todos'}
-        Display.highlight($('#nav_header_all_groups'));
+        Display.highlight('All Todos');
       },
 
       processAdd: function(response) {
@@ -500,7 +509,7 @@ $(function() {
         Display.main();
         Display.nav();
         Display.count();
-        Display.highlight($('#nav_header_all_groups'));
+        Display.highlight('All Todos');
       },
 
       processEdit: function() {
