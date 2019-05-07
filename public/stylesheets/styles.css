@@ -72,11 +72,12 @@ nav span {
 
 main {
   display: block;
-  margin-left: 280px;
+  padding-left: 300px;
   height: 100%;
   background: #fff;
-  margin-right: 60px;
-  max-width: 1300px;
+  max-width: 1000px;
+  margin: auto;
+  padding-right: 50px;
 }
 
 /* Main Header */
@@ -253,13 +254,13 @@ label[for="hamburger"] img {
 
 @media (max-width: 768px) {
 
+  main {
+    padding-left: 50px;
+  }
+
 	nav {
 		display: none;
 		width: 200px;
-	}
-
-	main {
-		margin-left: 30px;
 	}
 
   label[for="hamburger"], label[for="hamburger"] img {
@@ -271,7 +272,7 @@ label[for="hamburger"] img {
 	}
 
 	#hamburger:checked ~ main  {
-		margin-left: 230px;
+		padding-left: 230px;
 	}	
 
 	#hamburger:checked ~ label[for="hamburger"] {

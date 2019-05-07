@@ -51,10 +51,10 @@ $(function() {
   const Drive = {
 
     //Deployment URL
-    rootUrl: 'https://multiview-todo-app.herokuapp.com',
+    // rootUrl: 'https://multiview-todo-app.herokuapp.com',
 
     // Localhost URL
-    // rootUrl: 'https://localhost:3000',
+    rootUrl: 'http://localhost:3000',
 
     retrieveAllTodos: function() {
       var method = 'GET';
