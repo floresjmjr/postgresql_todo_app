@@ -102,6 +102,7 @@ $(function() {
       var method = 'GET';
       var extension = '/api/todos';
       var url = (this.deployedRootUrl || this.localRootUrl) + extension;
+      console.log('url', url)
       this.makeRequest(method, url).then((response) => {
         console.log('requestAllTodos response');
         LStodoApp.loadPage(JSON.parse(response));

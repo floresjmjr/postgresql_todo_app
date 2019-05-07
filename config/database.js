@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize')
 
+// Option 1
 // module.exports = new Sequelize('todos', null, null, {
 //   host: 'localhost',
 //   dialect: 'postgres',
@@ -17,6 +18,13 @@ const Sequelize = require('sequelize')
 
 // })
 
-// Option 2
-module.exports = new Sequelize(process.env.DATABASE_URL);
+
+// Option 2 (connection string)
+module.exports = new Sequelize(process.env.DATABASE_URL, {
+  
+  define: {
+    timestamps: false,
+  },
+
+});
 
