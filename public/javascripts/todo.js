@@ -95,12 +95,12 @@ $(function() {
   const Drive = {
 
     localRootUrl: 'http://localhost:3000',
-    deployedRootUrl: 'https://multiview-todo-app.herokuapp.com',
+    deployedRootUrl: process.env.ROOT_URL,
 
     retrieveAllTodos: function() {
       var method = 'GET';
       var extension = '/api/todos';
-      var url = (this.localRootUrl || this.deployedRootUrl) + extension;
+      var url = (this.deployedRootUrl || this.localRootUrl) + extension;
       this.makeRequest(method, url).then((response) => {
         console.log('requestAllTodos response');
         LStodoApp.loadPage(JSON.parse(response));
@@ -112,7 +112,7 @@ $(function() {
     editTodo: function() {
       var method = 'PUT';
       var extension = `/api/todos/${LStodoApp.todoP().id}`;
-      var url = (this.localRootUrl || this.deployedRootUrl) + extension;
+      var url = (this.deployedRootUrl || this.localRootUrl) + extension;
       var data = LStodoApp.todoP()
       this.makeRequest(method, url, data).then((response) => {
         console.log('request Edit response')
@@ -125,7 +125,7 @@ $(function() {
     addTodo: function() {
       var method = 'POST';
       var extension = '/api/todos'
-      var url = (this.localRootUrl || this.deployedRootUrl) + extension;
+      var url = (this.deployedRootUrl || this.localRootUrl) + extension;
       var data = LStodoApp.todoP()
       this.makeRequest(method, url, data).then((response) => {
         LStodoApp.processAdd(JSON.parse(response));        
@@ -137,7 +137,7 @@ $(function() {
     deleteTodo: function() {
       var method = 'DELETE';
       var extension = `/api/todos/${LStodoApp.todoP().id}`;
-      var url = (localRootUrl || deployedRootUrl) + extension;
+      var url = (this.deployedRootUrl || this.localRootUrl) + extension;
       this.makeRequest(method, url).then((response) => {
         console.log('todo was removed', LStodoApp.todoP().id);
         LStodoApp.processRemove();
