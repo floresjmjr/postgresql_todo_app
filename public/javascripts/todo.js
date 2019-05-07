@@ -29,6 +29,7 @@ $(function() {
         list = LStodoApp.separate(LStodoApp.allTodos());
       }
       $('#main_todos').html(this.hsCompile(scriptId, list));
+      this.count();
     },
 
     nav: function() {
@@ -38,55 +39,10 @@ $(function() {
       console.log('display navTodoGroups', LStodoApp.completedGroups(), LStodoApp.todoGroups())
     },    
 
-
-    //Need to refactor
-    highlight: function(header) {
-      console.log('highlight')
-      var element;
+    highlight: function(element) {
+      console.log('highlight', element)
       $('nav').find('.highlight').removeClass('highlight');
-      if(header === 'All Todos') {
-        element = $('#nav_header_all_groups')
-        this.updateHeaderCount($('#nav_header_all_groups span').text())
-        this.updateHeaderTitle($('#nav_header_all_groups h2').text());
-      } else if(LStodoApp.selected().view) {
-        console.log('view highlight')
-        if(LStodoApp.selected().type === 'nav_list_all_groups'){
-          element = $('#nav_list_all_groups p').filter((idx, el)=>{
-            return $(el).text() === LStodoApp.selected().date
-          }).closest('div');
-        } else {
-          element = $('#nav_list_completed_groups p').filter((idx, el)=>{
-            return $(el).text() === LStodoApp.selected().date
-          }).closest('div');
-        }
-        this.updateHeaderCount(element.length)
-        this.updateHeaderTitle(LStodoApp.selected().date)
-      } else {
-        if(LStodoApp.selected().type === 'All Todos'){
-          console.log('all highlight')
-          element = $('#nav_header_all_groups');
-          console.log('length');
-          this.updateHeaderCount(LStodoApp.allTodos().length)
-          this.updateHeaderTitle($(element).find('h2').text())
-        } else {
-          console.log('completed highlight')
-          element = $('#nav_header_completed_groups');
-          this.updateHeaderCount(LStodoApp.filterCompletedTodos().length)
-          console.log('testing', $(element).find('h2').text())
-          this.updateHeaderTitle($(element).find('h2').text())
-        }
-      }
-      console.log('element length', $(element).length)
-      $(element).addClass('highlight')
-    },
-
-    updateHeaderCount: function(text) {
-      $('header span').text(text)
-    },
-
-    updateHeaderTitle: function(text) {
-      $('header h1').text(text);
-
+      $(element).addClass('highlight');
     },
 
   }
@@ -94,54 +50,44 @@ $(function() {
 
   const Drive = {
 
-    //Localhost root URL
-    // root: 'http://localhost:3000',
-
-    //Heroku root URL
-    // root: 'https://multiview-todo-app.herokuapp.com',
-
     retrieveAllTodos: function() {
       var method = 'GET';
       var url = '/api/todos';
-      // var url = this.root + extension;
       console.log('url', url)
       this.makeRequest(method, url).then((response) => {
         console.log('requestAllTodos response');
         LStodoApp.loadPage(JSON.parse(response));
       }, (error) => {
-        console.error('Failed', error);
+        console.error('Could NOT retrieve All', error);
       })
     },
 
     editTodo: function() {
       var method = 'PUT';
       var url = `/api/todos/${LStodoApp.todoP().id}`;
-      // var url = this.root + extension;
       var data = LStodoApp.todoP()
       this.makeRequest(method, url, data).then((response) => {
         console.log('request Edit response')
         LStodoApp.processEdit();  
       }, (error) => {
-        console.error(`didn't update`, error)
+        console.error(`Did NOT update`, error)
       })
     },
 
     addTodo: function() {
       var method = 'POST';
       var url = '/api/todos'
-      // var url = this.root + extension;
       var data = LStodoApp.todoP()
       this.makeRequest(method, url, data).then((response) => {
         LStodoApp.processAdd(JSON.parse(response));        
       }, (error) => {
-        console.error("wasn't added", error);
+        console.error("Was NOT added", error);
       })
     },
 
     deleteTodo: function() {
       var method = 'DELETE';
       var url = `/api/todos/${LStodoApp.todoP().id}`;
-      // var url = this.root + extension;
       this.makeRequest(method, url).then((response) => {
         console.log('todo was removed', LStodoApp.todoP().id);
         LStodoApp.processRemove();
@@ -278,9 +224,11 @@ $(function() {
 
       loadHeaderTodoGroups: function() {
         $('nav').on('click', 'header', (e) => {
-          console.log('load header groups',$(e.currentTarget) );
-          e.preventDefault();
-          console.log('count of header group', $(e.currentTarget).find('span').text());
+          console.log('loadHeaderTodoGroups', e.currentTarget.tagName)
+          var count = $(e.currentTarget).find('span').text()
+          var title = $(e.currentTarget).find('h2').text();
+          $('main header span').text(count)
+          $('header h1').text(title);
           Display.highlight(e.currentTarget);
           var groupType = $(e.currentTarget).find('h2').text();
           selected = {type: groupType}
@@ -290,12 +238,14 @@ $(function() {
 
       loadGroups: function() {
         $('nav').on('click', 'li', (e)=> {
-          console.log('nav_list_all_groups');
-          e.preventDefault();
+          console.log('loadGroups', e.currentTarget.tagName)
+          var count = $(e.currentTarget).find('span').text()
+          var title = $(e.currentTarget).find('p').text();
+          $('main header span').text(count)
+          $('header h1').text(title);
           Display.highlight(e.currentTarget);
-          const date = $(e.currentTarget).find('p').text();
           const groupType = $(e.currentTarget).closest('ul').attr('id')
-          selected = {view: 'group', date: date, type: groupType}
+          selected = {view: 'group', date: title, type: groupType}
           Display.main('group');
         })
       },
@@ -311,24 +261,28 @@ $(function() {
         return this.isNotUnique(groupArr, t);
       },
 
-      createOrSortGroups: function(scope='nav_list_all_groups'){
-        if(scope === 'nav_list_all_groups') {
-          todoGroups = [];
-          var groupArr = todoGroups
-          var todos = allTodos;
-        } else {
+      createOrSortGroups: function(variation){
+        if(variation === 'Completed') {
           completedGroups = [];
           var groupArr = completedGroups;
           var todos = this.filterCompletedTodos();
+        } else {
+          todoGroups = [];
+          var groupArr = todoGroups
+          var todos = allTodos;
         }
         todos.forEach((todoObj) => {
-          if(this.hasTodoGroup(groupArr, todoObj)){
-            this.addTodoToGroup(groupArr, todoObj);
-          } else {
-            this.createTodoGroup(groupArr, todoObj);
-          }
+          this.determineTodoAction(groupArr, todoObj);
         })
         console.log('createOrSortGroups', groupArr)
+      },
+
+      determineTodoAction: function(groupArr, todoObj){
+        if(this.hasTodoGroup(groupArr, todoObj)){
+          this.addTodoToGroup(groupArr, todoObj);
+        } else {
+          this.createTodoGroup(groupArr, todoObj);
+        }
       },
 
       createTodoGroup: function(groupArr, t) {
@@ -349,7 +303,7 @@ $(function() {
 
       findGroupByDate(date, type){
         console.log('findGroupById', date, type);
-        if(type === 'id="nav_list_all_groups'){
+        if(type === 'nav_list_all_groups'){
           var arr = todoGroups;
         } else {
           var arr = completedGroups;
@@ -366,10 +320,47 @@ $(function() {
       },
 
       completedGroups: function(){
-        this.createOrSortGroups('completed')
+        this.createOrSortGroups('Completed')
         console.log('completedGroups', completedGroups);
         return completedGroups;
       },
+
+      removeTodoGroup: function() {
+        var groupId;
+        var todoIdx;
+        var groupIdx;
+        todoGroups.forEach((tg, tgIdx)=>{
+          tg.collection.forEach((t, tIdx)=>{
+            if (t.id === todoP.id){
+              groupId = tg.id;
+              todoIdx = tIdx;
+              groupIdx = tgIdx;
+            }
+          })
+        })
+        var group = this.findTodoGroupById(groupId)
+        group.collection.splice(todoIdx, 1)
+        if(group.collection.length === 0) {
+          todoGroups.splice(groupIdx, 1);
+        }
+      },
+
+      replaceTodoGroup: function() {
+        this.removeTodoGroup();
+        this.addTodoGroup();
+      },
+
+      findTodoGroupById: function(groupId) {
+        return todoGroups.filter((tg)=>{
+          return tg.id === groupId
+        })[0]
+      },
+
+      addTodoGroup: function() {
+        this.determineTodoAction(todoGroups, this.addFormatedDate(todoP))
+      },
+
+
 
       //Functions
 
@@ -495,6 +486,7 @@ $(function() {
         })    
       },
 
+
       //Local Drive 
 
       loadPage: function(data) {
@@ -502,46 +494,43 @@ $(function() {
         this.formatTodos(allTodos);
         console.log('loadpage', allTodos);
         this.createOrSortGroups();
+        this.createOrSortGroups('Completed');
         console.log('loadpage todoGroups', todoGroups);
         Display.main();
         Display.nav();
-        Display.count();
+        $('main header span').text(allTodos.length);
         selected = {type: 'All Todos'}
-        Display.highlight('All Todos');
       },
 
       processAdd: function(response) {
         todoP.id = response.id;
         console.log('processAdd', todoP);
         this.addTodo()
-        this.createOrSortGroups();
+        this.addTodoGroup();
         //Reseting the selected
         selected = 'All Todos';
         Display.main();
         Display.nav();
-        Display.count();
-        Display.highlight('All Todos');
+        Display.highlight();
       },
 
       processEdit: function() {
         console.log('processEdit');
         this.replaceTodo();
-        this.createOrSortGroups();
+        this.replaceTodoGroup();
         Display.nav();
         Display.main();
-        Display.count();
-        Display.highlight();
+        // $('nav').trigger('click');
       },
 
       processRemove: function(){
         console.log('processRemove');
         this.removeTodo();
-        this.createOrSortGroups();
+        this.removeTodoGroup();
         Display.nav();
         Display.main();
-        Display.count();
-        Display.highlight();
       },
+
 
       // Local functions
 
