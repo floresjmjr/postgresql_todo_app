@@ -95,7 +95,8 @@ $(function() {
   const Drive = {
 
     localRootUrl: 'http://localhost:3000',
-    deployedRootUrl: process.env.ROOT_URL,
+    // deployedRootUrl: process.env.ROOT_URL,
+    deployedRootUrl: 'https://multiview-todo-app.herokuapp.com',
 
     retrieveAllTodos: function() {
       var method = 'GET';
