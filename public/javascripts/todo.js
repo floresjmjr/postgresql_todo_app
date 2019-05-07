@@ -50,9 +50,15 @@ $(function() {
 
   const Drive = {
 
+    //Deployment URL
+    rootUrl: 'https://multiview-todo-app.herokuapp.com',
+
+    // Localhost URL
+    // rootUrl: 'https://localhost:3000',
+
     retrieveAllTodos: function() {
       var method = 'GET';
-      var url = '/api/todos';
+      var url = rootUrl + '/api/todos';
       console.log('url', url)
       this.makeRequest(method, url).then((response) => {
         console.log('requestAllTodos response');
@@ -64,7 +70,7 @@ $(function() {
 
     editTodo: function() {
       var method = 'PUT';
-      var url = `/api/todos/${LStodoApp.todoP().id}`;
+      var url = rootUrl + `/api/todos/${LStodoApp.todoP().id}`;
       var data = LStodoApp.todoP()
       this.makeRequest(method, url, data).then((response) => {
         console.log('request Edit response')
@@ -76,7 +82,7 @@ $(function() {
 
     addTodo: function() {
       var method = 'POST';
-      var url = '/api/todos'
+      var url = rootUrl + '/api/todos'
       var data = LStodoApp.todoP()
       this.makeRequest(method, url, data).then((response) => {
         LStodoApp.processAdd(JSON.parse(response));        
@@ -87,7 +93,7 @@ $(function() {
 
     deleteTodo: function() {
       var method = 'DELETE';
-      var url = `/api/todos/${LStodoApp.todoP().id}`;
+      var url = rootUrl + `/api/todos/${LStodoApp.todoP().id}`;
       this.makeRequest(method, url).then((response) => {
         console.log('todo was removed', LStodoApp.todoP().id);
         LStodoApp.processRemove();
