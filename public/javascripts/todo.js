@@ -418,7 +418,7 @@ $(function() {
           e.preventDefault();
           this.obtainInputs();
           if (todoP.title.length < 3) {
-            alert('You must enter a title at lease 3 characters long.');
+            alert('You must enter a title at least 3 characters long.');
           } else {
             if (todoP.id) {
               console.log('save has id', todoP)
