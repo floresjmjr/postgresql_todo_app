@@ -45,6 +45,31 @@ $(function() {
       $(element).addClass('highlight');
     },
 
+    updateCount: function() {
+      var count;
+      if($('main .completed').length === $('main dt').length) {
+        count = this.findCount('#nav_list_completed_groups p')
+      } else {
+        count = this.findCount('#nav_header_all_groups p')
+      }
+      console.log('updateCount', count)
+      $('main header span').text(count);
+    },
+
+    findCount: function(context) {
+      var count;
+      var title = $('header h1').text()
+      console.log('findCount', context, title);
+
+
+      $(context).each((x, el)=>{ 
+        if($(el).text() === title) {
+          count = $(el).closest('li').find('span').text();
+        }
+      });
+      return count
+    },
+
   }
 
 
@@ -332,6 +357,7 @@ $(function() {
       },
 
       removeTodoGroup: function() {
+        console.log('removeTodoGroup', todoGroups)
         var groupId;
         var todoIdx;
         var groupIdx;
@@ -348,7 +374,11 @@ $(function() {
         group.collection.splice(todoIdx, 1)
         if(group.collection.length === 0) {
           todoGroups.splice(groupIdx, 1);
+          // $('main header span').text(0)
+        } else {
+          group.count -= 1;
         }
+        // console.log('after remove', todoGroups)
       },
 
       replaceTodoGroup: function() {
@@ -514,7 +544,9 @@ $(function() {
         this.addTodo()
         this.addTodoGroup();
         //Reseting the selected
-        selected = 'All Todos';
+        selected = {type: 'All Todos'}
+        $('main header span').text(allTodos.length)
+        $('header h1').text('All Todos');
         Display.main();
         Display.nav();
         Display.highlight();
@@ -526,7 +558,7 @@ $(function() {
         this.replaceTodoGroup();
         Display.nav();
         Display.main();
-        // $('nav').trigger('click');
+        Display.updateCount()
       },
 
       processRemove: function(){
@@ -535,6 +567,7 @@ $(function() {
         this.removeTodoGroup();
         Display.nav();
         Display.main();
+        Display.updateCount()
       },
 
 
