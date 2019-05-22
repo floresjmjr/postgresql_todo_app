@@ -47,10 +47,16 @@ $(function() {
 
     updateCount: function() {
       var count;
-      if($('main .completed').length === $('main dt').length) {
-        count = this.findCount('#nav_list_completed_groups p')
+      if($('header h1').text() === 'All Todos') {
+        count = $('#nav_header_all_groups span').text();
+      } else if ($('header h1').text() === 'Completed') {
+        count = $('#nav_header_completed_groups span').text();
       } else {
-        count = this.findCount('#nav_header_all_groups p')
+        if($('main .completed').length === $('main dt').length) {
+          count = this.findCount('#nav_list_completed_groups p')
+        } else {
+          count = this.findCount('#nav_list_all_groups p')
+        }
       }
       console.log('updateCount', count)
       $('main header span').text(count);
@@ -64,6 +70,7 @@ $(function() {
 
       $(context).each((x, el)=>{ 
         if($(el).text() === title) {
+          console.log('match', title);
           count = $(el).closest('li').find('span').text();
         }
       });
@@ -547,7 +554,7 @@ $(function() {
         $('header h1').text('All Todos');
         Display.main();
         Display.nav();
-        Display.highlight();
+        Display.highlight('#nav_header_all_groups');
       },
 
       processEdit: function() {
